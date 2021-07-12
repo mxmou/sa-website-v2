@@ -11,32 +11,70 @@ aliases:
 Addons are located inside the `addons` folder. Each addon is inside its own folder as well.
 In order to tell the addon loader how the addon plans to work, addons use a standard `addon.json` file located at the root of the addon's folder.  
 
-## `name` (string, required)
+## `name`
+
+| | |
+| - | - |
+| Type | `String` |
+| Required | Yes |
+
 The name of the addon. Don't make it too long.  
 Try to make a descriptive name, avoid words like "Scratch", "tool", "feature".
 
-## `description` (string, required)
+## `description`
+
+| | |
+| - | - |
+| Type | `String` |
+| Required | Yes |
+
 The description of the addons.
 For consistency, descriptions **must** end with a dot.
 
-## `tags` (array, required)
+## `tags`
+
+| | |
+| - | - |
+| Type | `Array` |
+| Required | Yes |
+
 Tags are used for filtering and badges on the Scratch Addons settings page.  
 One of these is **required**:  `community`, `editor`, `popup`, `easterEgg`.  
 Other options are: `theme`, `beta`, `recommended`, `forums`, `danger`, `codeEditor`, `costumeEditor`, `projectPlayer`, `editorMenuBar` `projectPage`, `profiles`, `studios`, `comments`.
 
-## `permissions` (array)
+## `permissions`
+
+| | |
+| - | - |
+| Type | `Array` |
+
 You can specify permissions by providing a `permissions` array.  
 Possible items: `"notifications"`, `"badge"`, `"clipboardWrite"`.  
 
-## `persistentScripts` (array)
+## `persistentScripts`
+
+| | |
+| - | - |
+| Type | `Array` |
+
 You can add persistent scripts by providing a `persistentScripts` array conformed of JS files (e.g. `["example.js"]`).
 
-## `userscripts` and `userstyles` (array)
+## `userscripts`, `userstyles`
+
+| | |
+| - | - |
+| Type | `Array` |
+
 Declaring userscripts and userstyles is very similar.
 Unlike persistent scripts, this is an array of objects, not strings.  
 Each object must specify the url to the userscript/userstyle through the `"url"` property, and provide an array of URL matches. If any of these patterns match, the userscript/userstyle is injected.
 
-### `matches` (array)
+### `matches`
+
+| | |
+| - | - |
+| Type | `Array` |
+
 Matches that allow the userscript/userstyle to run on. Values can be a URL match pattern, or `projects`, `projectEmbeds`, `studios`, `profiles`, `topics`, `newPostScreens`, `editingScreens`, `forums`, `scratchWWWNoProject`.
 ```json
 {
@@ -53,7 +91,12 @@ Matches that allow the userscript/userstyle to run on. Values can be a URL match
 }
 ```
 
-### `settingMatch` (object)
+### `settingMatch`
+
+| | |
+| - | - |
+| Type | `Object` |
+
 You can provide a `settingMatch` object that will result in your userscript/userstyle only running if the specified option is set to the specified value.
 ```json
 {
@@ -69,11 +112,21 @@ You can provide a `settingMatch` object that will result in your userscript/user
   ]
 }
 ```
-### `runAtComplete` (boolean, userscripts only)
+### `runAtComplete` (userscripts only)
+
+| | |
+| - | - |
+| Type | `Boolean` |
+
 Specifies whether the userscript should run after the page has loaded (after the window load event). If unspecified, `true` is assumed.  
 If set to `false`, the userscript is only guaranteed to run after the \<head> element of the document has loaded.
 
-## `settings` (object)
+## `settings`
+
+| | |
+| - | - |
+| Type | `Object` |
+
 Settings allow the addon's users to specify settings in Scratch Addons' settings panel. Inside your persistent scripts and userscripts, you can then access those settings with the `addon.settings` API.  
 Specify a `settings` property and provide an array of option objects.
 
@@ -104,7 +157,11 @@ The properties of the object are as follows. All properties are required.
 }
 ```
 
-## `credits` (array)
+## `credits`
+
+| | |
+| - | - |
+| Type | `Array` |
 
 You can provide a `credits` array of objects. This attribution is shown in the extension settings.  
 These objects must have a `"name"` attribute set to a string, and they can have a `"link"` attribute with a URL value.  
@@ -120,11 +177,21 @@ Example:
 }
 ```
 
-## `enabledByDefault` (boolean)
+## `enabledByDefault`
+
+| | |
+| - | - |
+| Type | `Boolean` |
+
 You can provide the `enabledByDefault` property and set it to `true` to specify if the addon should be enabled by default. Its default value is `false`.  
 Keep in mind, few addons will be enabled by default. If you want your addon to be enabled by default, please open a discussion issue.
 
-## `info` (array)
+## `info`
+
+| | |
+| - | - |
+| Type | `Array` |
+
 An array of additional information (e.g. warnings, notices) about the addon. Each item of the array is an object consisting of `type` (string) -either `warning` or `notice` - `text` (string) - the text to be displayed - and `id` (string) - the id of the information.
 Example:
 ```json
@@ -144,7 +211,12 @@ Example:
 }
 ```
 
-## `presets` (array)
+## `presets`
+
+| | |
+| - | - |
+| Type | `Array` |
+
 An array of presets for the addon. Each item in the `presets` array should be an object consisting of `name` (string), `id`(string), `description` (string) and `values` (object). The keys in the `values` object should the addon settings ids, and the values should be the values to set the setting with the id of the key to.
 
  
@@ -166,10 +238,20 @@ Example:
 }
 ```
 
-## `libraries` (array)
+## `libraries`
+
+| | |
+| - | - |
+| Type | `Array` |
+
 An array of libraries that the addon uses.
 
-## `popup` (object)
+## `popup`
+
+| | |
+| - | - |
+| Type | `Object` |
+
 When added, creates a new popup tab in the browser popup.
 Example:
 ```json
@@ -182,17 +264,42 @@ Example:
 }
 ```
 
-## `dynamicDisable` (boolean)
+## `dynamicDisable`
+
+| | |
+| - | - |
+| Type | `Boolean` |
+
 Indicates whether the addon's scripts should be considered disabled when disabled as the page is running. Defaults to `false`.
 
-## `dynamicEnable` (boolean)
+## `dynamicEnable`
+
+| | |
+| - | - |
+| Type | `Boolean` |
+
 Indicates whether the addon's scripts should be considered enabled when enabled as the page is running. Defaults to `false`.
 
-## `injectAsStyleElt` (boolean)
+## `injectAsStyleElt`
+
+| | |
+| - | - |
+| Type | `Boolean` |
+
 Indicates whether the addon's userstyles should be injected as style elements rather than link elements. Defaults to `false`.
 
-## `updateUserstylesOnSettingsChange` (boolean)
+## `updateUserstylesOnSettingsChange`
+
+| | |
+| - | - |
+| Type | `Boolean` |
+
 Indicates whether the addon's userstyles should be removed and rematched to the new settings. Defaults to `false`.
 
-## `versionAdded` (string)
+## `versionAdded`
+
+| | |
+| - | - |
+| Type | `String` |
+
 The version the addon was added. If the value is the same as the current version of the extension, the addon will get the new tag.
